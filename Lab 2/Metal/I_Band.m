@@ -14,9 +14,9 @@ ret = zeros(33);
 
 for counter = 1:1:33
   
-  ret(counter) = Tr(counter,2) * 1e-8 / (Tr(counter,1)^5 * (exp(h*c/(Tr(counter,1)*k_B*temp)) -1 ));
+  ret(counter) = Tr(counter,2) / (Tr(counter,1)^5 * (exp(h*c/(Tr(counter,1)*k_B*temp)) -1 ));
   
-  integral = integral + 1 * ret(counter);
+  integral = integral + 1e-8 * ret(counter);
   
 end
 

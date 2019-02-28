@@ -7,10 +7,10 @@ ROI_red = red(890:930,1380:1432);
 ROI_blue = blue(890:930,1380:1432);
 ROI_green = green(890:930,1380:1432);
 % imshow(image(890:930,1380:1432, :))
-figure;
-image(image_test)
-figure;
-image(image_test(890:930,1380:1432,:))
+%figure;
+%image(image_test)
+%figure;
+%image(image_test(890:930,1380:1432,:))
 
 mean_red = mean(ROI_red, 'all');
 mean_blue = mean(ROI_blue, 'all');
@@ -42,6 +42,7 @@ hold all
 plot(1000:10:2000, ratio_BR, 'b.-')
 plot(1000:10:2000, ratio_GR, 'g.-')
 plot(1000:10:2000, ratio_BG, 'r.-')
+plot(1373, 0:0.01:1, 'k.-')
 legend('expected b/r','expected g/r','expected b/g', 'metal b/r', 'metal g/r', 'metal b/g')
 
 hold all
@@ -50,6 +51,7 @@ figure;
 title('intensities as a function of wavelength and temperature')
 xlabel('wavelength (m)')
 ylabel('intensity')
+
 for a = 1000:10:2000
 hold all
 [b_1, int_b] = I_Band(a, Tr_blue);
@@ -64,7 +66,6 @@ plot(Tr_green(:,1), g_1, 'g.-')
 %plot(Tr_blue(:,1), Tr_blue(:,2), 'b.-')
 %plot(Tr_red(:,1), Tr_red(:,2), 'r.-')
 %plot(Tr_green(:,1), Tr_green(:,2), 'g.-')
-
 
 end
 
