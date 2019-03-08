@@ -5,11 +5,6 @@ metal = 1000:10:2000;
 %convenience is a h*** of a d***
 current_object = sun;
 
-%Calibration ratios
-R_calibration = 1;
-G_calibration = 1;
-B_calibration = 1;
-
 %% Section 1: Extract region of interest from picture 
 %----------------------%
 %For Metal:
@@ -54,9 +49,9 @@ hold all
 [r_1, int_r] = I_Band(a, Tr_red);
 [g_1, int_g] = I_Band(a, Tr_green);
 
-plot(a, B_calibration*(int_b/int_r), 'b.-')
-plot(a, G_calibration*(int_g/int_r), 'g.-')
-plot(a, (B_calibration/G_calibration)*(int_b/int_g), 'r.-')
+plot(a, int_b/int_r, 'b.-')
+plot(a, int_g/int_r, 'g.-')
+plot(a, int_b/int_g, 'r.-')
 
 end
 hold all

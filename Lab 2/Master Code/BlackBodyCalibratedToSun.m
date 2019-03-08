@@ -3,25 +3,30 @@ sun = 4000:20:7000;
 metal = 1000:10:2000;
 
 %convenience is a h*** of a d***
-current_object = metal;
+current_object = sun;
+
+%Calibration ratios
+R_calibration = 1;
+G_calibration = 0.9095;
+B_calibration = 0.8036;
 
 %% Section 1: Extract region of interest from picture 
 %----------------------%
 %For Metal:
-[red,green,blue,image_test] = GetRAWDATAandIMAGE('Metal.dng');
+%[red,green,blue,image_test] = GetRAWDATAandIMAGE('Metal.dng');
 
 %Region of interest for metal
-ROI_red = red(890:930,1380:1432);
-ROI_blue = blue(890:930,1380:1432);
-ROI_green = green(890:930,1380:1432);
+%ROI_red = red(890:930,1380:1432);
+%ROI_blue = blue(890:930,1380:1432);
+%ROI_green = green(890:930,1380:1432);
 %---------------------%
 %For Sun:
-%[red,green,blue,image] = GetRAWDATAandIMAGE('Sun.dng');
+[red,green,blue,image] = GetRAWDATAandIMAGE('Sun.dng');
 
 %Region of interest for sun 
-%ROI_red = red(1005:1181,1136:1350);
-%ROI_blue = blue(1005:1181,1136:1350);
-%ROI_green = green(1005:1181,1136:1350);
+ROI_red = red(1005:1181,1136:1350);
+ROI_blue = blue(1005:1181,1136:1350);
+ROI_green = green(1005:1181,1136:1350);
 
 %% Section 2: Calculate RGB channel intensity ratios
 
@@ -49,9 +54,9 @@ hold all
 [r_1, int_r] = I_Band(a, Tr_red);
 [g_1, int_g] = I_Band(a, Tr_green);
 
-plot(a, int_b/int_r, 'b.-')
-plot(a, int_g/int_r, 'g.-')
-plot(a, int_b/int_g, 'r.-')
+plot(a, B_calibration*(int_b/int_r), 'b.-')
+plot(a, G_calibration*(int_g/int_r), 'g.-')
+plot(a, (B_calibration/G_calibration)*(int_b/int_g), 'r.-')
 
 end
 hold all
@@ -62,10 +67,10 @@ plot(current_object, ratio_GR, 'gx')
 plot(current_object, ratio_BG, 'rx')
 
 %Sun
-%plot(5778, 0:0.01:3, 'k.-')
+plot(5778, 0:0.01:3, 'k.-')
 
 %Metal
-plot(1373, 0:0.01:1, 'k.-')
+%plot(1373, 0:0.01:1, 'k.-')
 
 legend('expected b/r','expected g/r','expected b/g')
 
